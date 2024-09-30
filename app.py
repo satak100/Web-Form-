@@ -17,7 +17,7 @@ def create_table():
     conn = connect_db()
     cursor = conn.cursor()
     cursor.execute('''
-        CREATE TABLE IF NOT EXISTS table_halum (
+        CREATE TABLE IF NOT EXISTS PTP_FORM (
             id SERIAL PRIMARY KEY,
             project TEXT,
             contractor TEXT,
@@ -80,7 +80,7 @@ def submit_form():
     conn = connect_db()
     cursor = conn.cursor()
     cursor.execute('''
-        INSERT INTO table_halum (project, contractor, location, task, ptp_number, name_role, date, steps, hazards, controls, responsible_staff, crew_activity, hazard, action_plan, coordinating_staff, checkbox_info) 
+        INSERT INTO PTP_FORM (project, contractor, location, task, ptp_number, name_role, date, steps, hazards, controls, responsible_staff, crew_activity, hazard, action_plan, coordinating_staff, checkbox_info) 
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
     ''', (project, contractor, location, task, ptp_number, name_role, date, steps, hazards, controls, responsible_staff, crew_activity, hazard, action_plan, coordinating_staff, checkbox_info))
     
@@ -94,7 +94,7 @@ def submit_form():
 def view_data():
     conn = connect_db()
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM table_halum")
+    cursor.execute("SELECT * FROM PTP_FORM")
     rows = cursor.fetchall()
     conn.close()
     return render_template('view_data.html', rows=rows)
