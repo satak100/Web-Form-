@@ -102,132 +102,134 @@
 </head>
 <body>
 
-    <h1>Pre-Task Planning (PTP) Form</h1>
+    <form action="/submit" method="POST">
+            <h1>Pre-Task Planning (PTP) Form</h1>
+            <div class="form-container">
+                <!-- First Row -->
+                <div class="row">
+                    <div class="label"><label for="project">Project:</label></div>
+                    <div class="input"><input type="text" id="project"></div>
+            
+                    <div class="label"><label for="contractor">Contractor:</label></div>
+                    <div class="input"><input type="text" id="contractor" ></div>
+            
+                    <div class="label"><label for="date">Date:</label></div>
+                    <div class="input"><input type="date" id="date" ></div>
+                </div>
+            
+                <!-- Second Row -->
+                <div class="row">
+                    <div class="label"><label for="location">Location:</label></div>
+                    <div class="input"><input type="text" id="location"></div>
+            
+                    <div class="label"><label for="name-role">Name / Role:</label></div>
+                    <div class="input"><input type="text" id="name-role"></div>
+            
+                    <div class="label"><label for="ptp-number">PTP #:</label></div>
+                    <div class="input"><input type="text" id="ptp-number"></div>
+                </div>
+            
+                <!-- Third Row (Task) -->
+                <div class="row task-row">
+                    <div class="label task-label"><label for="task">Task:</label></div>
+                    <div class="input task-input"><textarea id="task" rows="4"></textarea></div>
+                </div>
+            </div>
 
-    <div class="form-container">
-        <!-- First Row -->
-        <div class="row">
-            <div class="label"><label for="project">Project:</label></div>
-            <div class="input"><input type="text" id="project"></div>
-    
-            <div class="label"><label for="contractor">Contractor:</label></div>
-            <div class="input"><input type="text" id="contractor" ></div>
-    
-            <div class="label"><label for="date">Date:</label></div>
-            <div class="input"><input type="date" id="date" ></div>
-        </div>
-    
-        <!-- Second Row -->
-        <div class="row">
-            <div class="label"><label for="location">Location:</label></div>
-            <div class="input"><input type="text" id="location"></div>
-    
-            <div class="label"><label for="name-role">Name / Role:</label></div>
-            <div class="input"><input type="text" id="name-role"></div>
-    
-            <div class="label"><label for="ptp-number">PTP #:</label></div>
-            <div class="input"><input type="text" id="ptp-number"></div>
-        </div>
-    
-        <!-- Third Row (Task) -->
-        <div class="row task-row">
-            <div class="label task-label"><label for="task">Task:</label></div>
-            <div class="input task-input"><textarea id="task" rows="4"></textarea></div>
-        </div>
-    </div>
+            <div class="form-section">
+                <div class="table-section">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Steps</th>
+                                <th>Hazards</th>
+                                <th>Control</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="text" id="steps_1"></td>
+                                <td><input type="text" id="hazards_1"></td>
+                                <td><input type="text" id="control_1"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" id="steps_2"></td>
+                                <td><input type="text" id="hazards_2"></td>
+                                <td><input type="text" id="control_2"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" id="steps_3"></td>
+                                <td><input type="text" id="hazards_3"></td>
+                                <td><input type="text" id="control_3"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" id="steps_4"></td>
+                                <td><input type="text" id="hazards_4"></td>
+                                <td><input type="text" id="control_4"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-    <div class="form-section">
-        <div class="table-section">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Steps</th>
-                        <th>Hazards</th>
-                        <th>Control</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><input type="text" id="steps_1"></td>
-                        <td><input type="text" id="hazards_1"></td>
-                        <td><input type="text" id="control_1"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" id="steps_2"></td>
-                        <td><input type="text" id="hazards_2"></td>
-                        <td><input type="text" id="control_2"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" id="steps_3"></td>
-                        <td><input type="text" id="hazards_3"></td>
-                        <td><input type="text" id="control_3"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" id="steps_4"></td>
-                        <td><input type="text" id="hazards_4"></td>
-                        <td><input type="text" id="control_4"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+            <div class="form-section">
+                <label for="responsibleStaff">Staff responsible for implementing and checking controls:</label>
+                <input type="text" id="responsibleStaff" name="responsibleStaff">
+                
+                <h2>Crews working nearby</h2>
+                <div class="table-section">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Crew / Activity</th>
+                                <th>Hazards</th>
+                                <th>Action Plan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="text" id="crew_activity_1"></td>
+                                <td><input type="text" id="Hazards_1"></td>
+                                <td><input type="text" id="action_plan_1"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" id="crew_activity_2"></td>
+                                <td><input type="text" id="Hazards_2"></td>
+                                <td><input type="text" id="action_plan_2"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" id="crew_activity_3"></td>
+                                <td><input type="text" id="Hazards_3"></td>
+                                <td><input type="text" id="action_plan_3"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h1> </h1>
+                <label for="coordinatingStaff">Staff responsible for coordinating with other crews:</label>
+                <input type="text" id="coordinatingStaff" name="coordinatingStaff">
+            </div>
 
-    <div class="form-section">
-        <label for="responsibleStaff">Staff responsible for implementing and checking controls:</label>
-        <input type="text" id="responsibleStaff" name="responsibleStaff">
-        
-        <h2>Crews working nearby</h2>
-        <div class="table-section">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Crew / Activity</th>
-                        <th>Hazards</th>
-                        <th>Action Plan</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><input type="text" id="crew_activity_1"></td>
-                        <td><input type="text" id="Hazards_1"></td>
-                        <td><input type="text" id="action_plan_1"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" id="crew_activity_2"></td>
-                        <td><input type="text" id="Hazards_2"></td>
-                        <td><input type="text" id="action_plan_2"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" id="crew_activity_3"></td>
-                        <td><input type="text" id="Hazards_3"></td>
-                        <td><input type="text" id="action_plan_3"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        
-        <h1> </h1>
-        <label for="coordinatingStaff">Staff responsible for coordinating with other crews:</label>
-        <input type="text" id="coordinatingStaff" name="coordinatingStaff">
-    </div>
+            <div class="form-section">
+                <h2>Have you provived the information below?</h2>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" id="checkbox1"> Site layout</label>
+                    <label><input type="checkbox" id="checkbox2"> Equipment</label>
+                    <label><input type="checkbox" id="checkbox3"> Specific types of PPE</label>
+                    <label><input type="checkbox" id="checkbox4"> Medical facility information</label>
+                    <label><input type="checkbox" id="checkbox5"> Materials</label>
+                    <label><input type="checkbox" id="checkbox6"> Tools</label>
+                    <label><input type="checkbox" id="checkbox7"> Work schedule</label>
+                    <label><input type="checkbox" id="checkbox8"> Permits</label>
+                    <label><input type="checkbox" id="checkbox9"> Evacuation and emergency plans</label>
 
-    <div class="form-section">
-        <h2>Have you provived the information below?</h2>
-        <div class="checkbox-group">
-            <label><input type="checkbox" id="checkbox1"> Site layout</label>
-            <label><input type="checkbox" id="checkbox2"> Equipment</label>
-            <label><input type="checkbox" id="checkbox3"> Specific types of PPE</label>
-            <label><input type="checkbox" id="checkbox4"> Medical facility information</label>
-            <label><input type="checkbox" id="checkbox5"> Materials</label>
-            <label><input type="checkbox" id="checkbox6"> Tools</label>
-            <label><input type="checkbox" id="checkbox7"> Work schedule</label>
-            <label><input type="checkbox" id="checkbox8"> Permits</label>
-            <label><input type="checkbox" id="checkbox9"> Evacuation and emergency plans</label>
-
-        </div>
-        <h1></h1>
-        <input type="submit" value="Submit">
-    </div>
+                </div>
+                <h1></h1>
+                <input type="submit" value="Submit">
+            </div>
+    </form>
+    
     
 </body>
 </html>
