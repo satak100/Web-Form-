@@ -74,7 +74,7 @@ def submit_form():
     checkbox_info = []
     for i in range(1, 9):
         if request.form.get(f'checkbox{i}'):
-            checkbox_info.append(f'Checkbox {i}')
+            checkbox_info.append(f'checkbox{i}')
 
     conn = connect_db()
     cursor = conn.cursor()
