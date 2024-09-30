@@ -17,13 +17,24 @@ def create_table():
     conn = connect_db()
     cursor = conn.cursor()
     cursor.execute('''
-        CREATE TABLE IF NOT EXISTS pre_task_form (
+        CREATE TABLE IF NOT EXISTS PRE_TASK_form (
             id SERIAL PRIMARY KEY,
             project TEXT,
             contractor TEXT,
             location TEXT,
             task TEXT,
-            notes TEXT
+            ptp_number TEXT,
+            name_role TEXT,
+            date DATE,
+            steps TEXT[],
+            hazards TEXT[],
+            controls TEXT[],
+            responsible_staff TEXT,
+            crew_activity TEXT[],
+            Hazards TEXT[],
+            action_plan TEXT[],
+            coordinating_staff TEXT,
+            checkbox_info TEXT[]  -- Store checked information
         )
     ''')
     conn.commit()
@@ -41,12 +52,37 @@ def submit_form():
     contractor = request.form['contractor']
     location = request.form['location']
     task = request.form['task']
-    notes = request.form['notes']
+    ptp_number = request.form['ptp-number']
+    name_role = request.form['name-role']
+    date = request.form['date']
+    
+    # Handle steps, hazards, and controls
+    steps = [request.form.get(f'steps_{i}') for i in range(1, 4)]
+    hazards = [request.form.get(f'hazards_{i}') for i in range(1, 4)]
+    controls = [request.form.get(f'control_{i}') for i in range(1, 4)]
+
+    responsible_staff = request.form['responsibleStaff']
+    
+    crew_activity = [request.form.get(f'crew_activity_{i}') for i in range(1, 3)]
+    Hazards = [request.form.get(f'Hazards_{i}') for i in range(1, 3)]
+    action_plan = [request.form.get(f'action_plan_{i}') for i in range(1, 3)]
+
+
+    coordinating_staff = request.form['coordinatingStaff']
+
+    # Handle checkbox values
+    checkbox_info = []
+    for i in range(1, 9):
+        if request.form.get(f'checkbox{i}'):
+            checkbox_info.append(f'Checkbox {i}')
 
     conn = connect_db()
     cursor = conn.cursor()
-    cursor.execute("INSERT INTO pre_task_form (project, contractor, location, task, notes) VALUES (%s, %s, %s, %s, %s)",
-                   (project, contractor, location, task, notes))
+    cursor.execute('''
+        INSERT INTO PRE_TASK_form (project, contractor, location, task, ptp_number, name_role, date, steps, hazards, controls, responsible_staff, crew_activity, Hazards, action_plan, coordinating_staff, checkbox_info) 
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+    ''', (project, contractor, location, task, ptp_number, name_role, date, steps, hazards, controls, responsible_staff, crew_activity, Hazards, action_plan, coordinating_staff, checkbox_info))
+    
     conn.commit()
     conn.close()
 
@@ -57,7 +93,7 @@ def submit_form():
 def view_data():
     conn = connect_db()
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM pre_task_form")
+    cursor.execute("SELECT * FROM PRE_TASK_form")
     rows = cursor.fetchall()
     conn.close()
     return render_template('view_data.html', rows=rows)
