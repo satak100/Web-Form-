@@ -17,7 +17,7 @@ def create_table():
     conn = connect_db()
     cursor = conn.cursor()
     cursor.execute('''
-        CREATE TABLE IF NOT EXISTS PRE_TASK_form (
+        CREATE TABLE IF NOT EXISTS table_halum (
             id SERIAL PRIMARY KEY,
             project TEXT,
             contractor TEXT,
@@ -31,7 +31,7 @@ def create_table():
             controls TEXT[],
             responsible_staff TEXT,
             crew_activity TEXT[],
-            Hazards TEXT[],
+            hazard TEXT[],
             action_plan TEXT[],
             coordinating_staff TEXT,
             checkbox_info TEXT[]  -- Store checked information
@@ -57,31 +57,32 @@ def submit_form():
     date = request.form['date']
     
     # Handle steps, hazards, and controls
-    steps = [request.form.get(f'steps_{i}') for i in range(1, 4)]
-    hazards = [request.form.get(f'hazards_{i}') for i in range(1, 4)]
-    controls = [request.form.get(f'control_{i}') for i in range(1, 4)]
+    steps = [request.form.get(f'steps_{i}') for i in range(1, 5)]
+    hazards = [request.form.get(f'hazards_{i}') for i in range(1, 5)]
+    controls = [request.form.get(f'control_{i}') for i in range(1, 5)]
 
     responsible_staff = request.form['responsibleStaff']
     
-    crew_activity = [request.form.get(f'crew_activity_{i}') for i in range(1, 3)]
-    Hazards = [request.form.get(f'Hazards_{i}') for i in range(1, 3)]
-    action_plan = [request.form.get(f'action_plan_{i}') for i in range(1, 3)]
+    crew_activity = [request.form.get(f'crew_activity_{i}') for i in range(1, 4)]
+    hazard = [request.form.get(f'Hazard_{i}') for i in range(1, 4)]
+    action_plan = [request.form.get(f'action_plan_{i}') for i in range(1, 4)]
 
 
     coordinating_staff = request.form['coordinatingStaff']
 
     # Handle checkbox values
     checkbox_info = []
-    for i in range(1, 9):
-        if request.form.get(f'checkbox{i}'):
-            checkbox_info.append(f'checkbox{i}')
+    for i in range(1, 10):
+        cb = True if request.form.get(f'checkbox{i}') else False
+        checkbox_info.append(cb)
 
+    print(steps, checkbox_info)
     conn = connect_db()
     cursor = conn.cursor()
     cursor.execute('''
-        INSERT INTO PRE_TASK_form (project, contractor, location, task, ptp_number, name_role, date, steps, hazards, controls, responsible_staff, crew_activity, Hazards, action_plan, coordinating_staff, checkbox_info) 
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-    ''', (project, contractor, location, task, ptp_number, name_role, date, steps, hazards, controls, responsible_staff, crew_activity, Hazards, action_plan, coordinating_staff, checkbox_info))
+        INSERT INTO table_halum (project, contractor, location, task, ptp_number, name_role, date, steps, hazards, controls, responsible_staff, crew_activity, hazard, action_plan, coordinating_staff, checkbox_info) 
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+    ''', (project, contractor, location, task, ptp_number, name_role, date, steps, hazards, controls, responsible_staff, crew_activity, hazard, action_plan, coordinating_staff, checkbox_info))
     
     conn.commit()
     conn.close()
@@ -93,7 +94,7 @@ def submit_form():
 def view_data():
     conn = connect_db()
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM PRE_TASK_form")
+    cursor.execute("SELECT * FROM table_halum")
     rows = cursor.fetchall()
     conn.close()
     return render_template('view_data.html', rows=rows)
